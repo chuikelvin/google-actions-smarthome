@@ -73,169 +73,27 @@ const app = smarthome({
 
 const devicesitems = [{
   id: '1',
-  type: 'action.devices.types.LIGHT',
+  type: 'action.devices.types.CAMERA',
   traits: [
-    'action.devices.traits.OnOff',
-    'action.devices.traits.Brightness',
-    'action.devices.traits.ColorSetting',
+    'action.devices.traits.CameraStream'
   ],
   name: {
-    defaultNames: ['My Test Light1'],
-    name: 'Light 1',
-    nicknames: ['Patio Light'],
+    defaultNames: ['Security Camera'],
+    name: 'Camera 1',
+    nicknames: ['Front Door Camera'],
   },
   deviceInfo: {
     manufacturer: 'Siddhy Co',
-    model: 'Siddhys RGB Bulb',
-    hwVersion: '1.0',
-    swVersion: '1.0.1',
+    model: 'Siddhys Smart Camera',
+    hwVersion: '7.0',
+    swVersion: '7.0.7',
   },
   willReportState: true,
   attributes: {
-    commandOnlyOnOff: false,
-    commandOnlyColorSetting: false,
-    commandOnlyBrightness: false,
-    colorModel: 'rgb',
-    colorTemperatureRange: {
-      temperatureMinK: 2000,
-      temperatureMaxK: 6500
-    }
+    cameraStreamSupportedProtocols: ['hls', 'dash'],
+    cameraStreamNeedAuthToken: false,
+    cameraStreamNeedDrmEncryption:
   }
-},
-{
-  id: '2',
-  type: 'action.devices.types.LIGHT',
-  traits: [
-    'action.devices.traits.OnOff',
-    'action.devices.traits.Brightness',
-  ],
-  name: {
-    defaultNames: ['My Test Light2'],
-    name: 'Light 2',
-    nicknames: ['Corridor Light'],
-  },
-  deviceInfo: {
-    manufacturer: 'Siddhy Co',
-    model: 'Siddhys LED Bulb',
-    hwVersion: '2.0',
-    swVersion: '2.0.1',
-  },
-  willReportState: true,
-  attributes: {
-    commandOnlyOnOff: false,
-    commandOnlyBrightness: false,
-  }
-},
-{
-  id: '3',
-  type: 'action.devices.types.FAN',
-  traits: [
-    'action.devices.traits.OnOff',
-    'action.devices.traits.Toggles',
-  ],
-  name: {
-    defaultNames: ['My Fan'],
-    name: 'Fan1',
-    nicknames: ['Ceiling Fan'],
-  },
-  deviceInfo: {
-    manufacturer: 'Siddhy Co',
-    model: 'Siddhys High Effeciency Fan',
-    hwVersion: '3.0',
-    swVersion: '4.0.1',
-  },
-  willReportState: true,
-  attributes: {
-    commandOnlyOnOff: false,
-    commandOnlyFanSpeed: false,
-    availableFanSpeeds: [{
-      speeds: [{
-        speed_name: "S1",
-        speed_values: [{
-          speed_synonym: ["low", "speed 1"],
-          lang: "en"
-        }]
-      }, {
-        speed_name: "S2",
-        speed_values: [{
-          speed_synonym: ["high", "speed 2"],
-          lang: "en"
-        }]
-      }],
-      ordered: true,
-    }],
-    reversible: true,
-  }
-},
-{
-  id: '4',
-  type: 'action.devices.types.THERMOSTAT',
-  traits: [
-    'action.devices.traits.TemperatureSetting'
-  ],
-  name: {
-    defaultNames: ['Temp Control'],
-    name: 'Temperature Controller ',
-    nicknames: ['Thermal Controller'],
-  },
-  deviceInfo: {
-    manufacturer: 'Siddhy Co',
-    model: 'Siddhys Thermostat',
-    hwVersion: '4.0',
-    swVersion: '5.0.1',
-  },
-  willReportState: true,
-  attributes: {
-    availableThermostatModes: 'off,on,heat,cool,heatcool',
-    queryOnlyTemperatureSetting: false,
-    thermostatTemperatureUnit: 'C',
-    commandOnlyTemperatureSetting: false
-  },
-},
-{
-  id: '5',
-  type: 'action.devices.types.THERMOSTAT',
-  traits: [
-    'action.devices.traits.TemperatureSetting'
-  ],
-  name: {
-    defaultNames: ['Temp Sensor'],
-    name: 'Room Temperature Sensor',
-    nicknames: ['Ambient Temperature Sensor'],
-  },
-  deviceInfo: {
-    manufacturer: 'Siddhy Co',
-    model: 'Siddhys Temperature Sensor',
-    hwVersion: '5.0',
-    swVersion: '6.0.1',
-  },
-  willReportState: true,
-  attributes: {
-    queryOnlyTemperatureSetting: true,
-    thermostatTemperatureUnit: 'C'
-  },
-},
-{
-  id: '6',
-  type: 'action.devices.types.SWITCH',
-  traits: [
-    'action.devices.traits.OnOff'
-  ],
-  name: {
-    defaultNames: ['Plug Socket'],
-    name: 'Smart Switch',
-    nicknames: ['New Switch'],
-  },
-  deviceInfo: {
-    manufacturer: 'Siddhy Co',
-    model: 'Siddhys On/Off Switch',
-    hwVersion: '6.0',
-    swVersion: '7.0.1',
-  },
-  willReportState: true,
-  attributes: {
-    commandOnlyOnOff: false
-  },
 }]
 
 app.onSync((body) => {
@@ -252,80 +110,10 @@ app.onSync((body) => {
 const queryFirebase = async (deviceId) => {
   const snapshot = await firebaseRef.child(deviceId).once('value');
   const snapshotVal = snapshot.val();
-  if (deviceId == '1') {
-    return {
-      on: snapshotVal.OnOff.on,
-      brightness: snapshotVal.Brightness.brightness,
-      color: snapshotVal.ColorSetting.color
-    };
-  } else if (deviceId == '2') {
-    return {
-      on: snapshotVal.OnOff.on,
-      brightness: snapshotVal.Brightness.brightness
-    };
-  } else if (deviceId == '3') {
-    return {
-      on: snapshotVal.OnOff.on,
-      //currentFanSpeedSetting: snapshotVal.FanSpeed.currentFanSpeedSetting
-    };
-  } else if (deviceId == '4') {
-    return {
-      thermostatMode: snapshotVal.TemperatureSetting.thermostatMode,
-      thermostatTemperatureSetpoint: snapshotVal.TemperatureSetting.thermostatTemperatureSetpoint,
-      thermostatTemperatureAmbient: snapshotVal.TemperatureSetting.thermostatTemperatureAmbient,
-      thermostatHumidityAmbient: snapshotVal.TemperatureSetting.thermostatHumidityAmbient,
-      thermostatTemperatureSetpointLow: snapshotVal.TemperatureSetting.thermostatTemperatureSetpointLow,
-      thermostatTemperatureSetpointHigh: snapshotVal.TemperatureSetting.thermostatTemperatureSetpointHigh
-    };
-  } else if (deviceId == '5') {
-    return {
-      thermostatTemperatureAmbient: snapshotVal.TemperatureSetting.thermostatTemperatureAmbient,
-      thermostatHumidityAmbient: snapshotVal.TemperatureSetting.thermostatHumidityAmbient
-    };
-  } else if (deviceId == '6') {
-    return {
-      on: snapshotVal.OnOff.on
-    };
-  }
 }
 
 const queryDevice = async (deviceId) => {
   const data = await queryFirebase(deviceId);
-  if (deviceId == '1') {
-    return {
-      on: data.on,
-      brightness: data.brightness,
-      color: data.color
-    };
-  } else if (deviceId == '2') {
-    return {
-      on: data.on,
-      brightness: data.brightness
-    };
-  } else if (deviceId == '3') {
-    return {
-      on: data.on,
-      //currentFanSpeedSetting: data.currentFanSpeedSetting
-    };
-  } else if (deviceId == '4') {
-    return {
-      thermostatMode: data.thermostatMode,
-      thermostatTemperatureSetpoint: data.thermostatTemperatureSetpoint,
-      thermostatTemperatureAmbient: data.thermostatTemperatureAmbient,
-      thermostatHumidityAmbient: data.thermostatHumidityAmbient,
-      thermostatTemperatureSetpointLow: data.thermostatTemperatureSetpointLow,
-      thermostatTemperatureSetpointHigh: data.thermostatTemperatureSetpointHigh
-    };
-  } else if (deviceId == '5') {
-    return {
-      thermostatTemperatureAmbient: data.thermostatTemperatureAmbient,
-      thermostatHumidityAmbient: data.thermostatHumidityAmbient
-    };
-  } else if (deviceId == '6') {
-    return {
-      on: data.on
-    };
-  }
 }
 
 app.onQuery(async (body) => {
@@ -357,33 +145,9 @@ const updateDevice = async (execution,deviceId) => {
   const {params,command} = execution;
   let state, ref;
   switch (command) {
-    case 'action.devices.commands.OnOff':
-      state = {on: params.on};
-      ref = firebaseRef.child(deviceId).child('OnOff');
-      break;
-    case 'action.devices.commands.BrightnessAbsolute':
-      state = {brightness: params.brightness};
-      ref = firebaseRef.child(deviceId).child('Brightness');
-      break;
-    case 'action.devices.commands.ColorAbsolute':
-      state = {color: params.color};
-      ref = firebaseRef.child(deviceId).child('ColorSetting');
-      break;
-    case 'action.devices.commands.SetFanSpeed':
-      state = {currentFanSpeedSetting: params.fanSpeed};
-      ref = firebaseRef.child(deviceId).child('FanSpeed');
-      break;
-    case 'action.devices.commands.ThermostatTemperatureSetpoint':
-      state = {thermostatTemperatureSetpoint: params.thermostatTemperatureSetpoint};
-      ref = firebaseRef.child(deviceId).child('TemperatureSetting');
-      break;
-    case 'action.devices.commands.ThermostatSetMode':
-      state = {thermostatMode: params.thermostatMode};
-      ref = firebaseRef.child(deviceId).child('TemperatureSetting');
-      break;
-    case 'action.devices.commands.ThermostatTemperatureSetRange':
-      state = {thermostatTemperatureSetpointLow: params.thermostatTemperatureSetpointLow,thermostatTemperatureSetpointHigh: params.thermostatTemperatureSetpointHigh};
-      ref = firebaseRef.child(deviceId).child('TemperatureSetting');
+    case 'action.devices.commands.GetCameraStream':
+      state = {cameraStreamAccessUrl: 'https://www.radiantmediaplayer.com/media/bbb-360p.mp4'};
+      ref = firebaseRef.child(deviceId).child('SupportedStreamProtocols');
   }
   return ref.update(state)
     .then(() => state);
@@ -454,41 +218,6 @@ exports.reportstate = functions.database.ref('{deviceId}').onWrite(async (change
     return;
   }
   const snapshot = change.after.val();
-  if (deviceId == '1') {
-    var load = {
-      on: snapshot.OnOff.on,
-      brightness: snapshot.Brightness.brightness,
-      color: snapshot.ColorSetting.color
-    };
-  } else if (deviceId == '2') {
-    var load = {
-      on: snapshot.OnOff.on,
-      brightness: snapshot.Brightness.brightness
-    };
-  } else if (deviceId == '3') {
-    var load = {
-      on: snapshot.OnOff.on,
-      //currentFanSpeedSetting: snapshot.FanSpeed.currentFanSpeedSetting
-    };
-  } else if (deviceId == '4') {
-    var load = {
-      thermostatMode: snapshot.thermostatMode,
-      thermostatTemperatureSetpoint: snapshot.thermostatTemperatureSetpoint,
-      thermostatTemperatureAmbient: snapshot.thermostatTemperatureAmbient,
-      thermostatHumidityAmbient: snapshot.thermostatHumidityAmbient,
-      thermostatTemperatureSetpointLow: snapshot.thermostatTemperatureSetpointLow,
-      thermostatTemperatureSetpointHigh: snapshot.thermostatTemperatureSetpointHigh
-    };
-  } else if (deviceId == '5') {
-    var load = {
-      thermostatTemperatureAmbient: snapshot.thermostatTemperatureAmbient,
-      thermostatHumidityAmbient: snapshot.thermostatHumidityAmbient
-    };
-  } else if (deviceID == '6') {
-    var load = {
-      on: snapshot.OnOff.on
-    };
-  }
 
   const postData = {
     requestId: 'ff36a3ccsiddhy', /* Any unique ID */
