@@ -78,6 +78,9 @@ alt="Detailed Youtube Video" width="240" height="180" border="10" /></a>
     5. Select that item. The Google Assistant will then authenticate with your service and send a SYNC request, asking your service to provide a list of devices for the user.   
 26. Now pre-programmed devices will appear in the Google Home app.   
 
+## Adding stream URLS  
+
+Add your custom stream URLS in the following line https://github.com/shivasiddharth/google-actions-smarthome/blob/4f9bcec623f98a139b92dfc920478115427b2d2f/smarthome-control/functions/index.js#L74. Make sure to follow the pattern using the device id that you used to create the devices. Also, the number of streams should match the number of cameras created.  
 
 ## Adding or modifying the devices     
 
