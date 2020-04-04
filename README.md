@@ -1,9 +1,9 @@
 # Create your own smart devices  
 
+## This branch contains samples for creating smart cameras     
+
 This project contains the code which demonstrates the integration of smart home devices with the Google Assistant  
 using a Firebase backend.
-
-## This branch contains samples for creating smart cameras.
 
 ## How to  
 
