@@ -71,6 +71,8 @@ const app = smarthome({
   debug: true,
 })
 
+const cameraurls = {"1": "https://dai.google.com/linear/hls/pb/event/Sid4xiTQTkCT1SLu6rjUSQ/stream/f14c5fd7-8d9a-4d62-9210-4c44f8f2d664:SIN/variant/2aaf56a9716cc9a9f28658004cb0db29/bandwidth/3394688.m3u8", "2": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"}
+
 const devicesitems = [{
   id: '1',
   type: 'action.devices.types.CAMERA',
@@ -78,7 +80,7 @@ const devicesitems = [{
     'action.devices.traits.CameraStream'
   ],
   name: {
-    defaultNames: ['Security Camera'],
+    defaultNames: ['Security Camera 1'],
     name: 'Camera 1',
     nicknames: ['Front Door Camera'],
   },
@@ -90,11 +92,36 @@ const devicesitems = [{
   },
   willReportState: true,
   attributes: {
-    cameraStreamSupportedProtocols: ['hls', 'dash'],
+    cameraStreamSupportedProtocols: ['hls, progressive_mp4', 'dash'],
     cameraStreamNeedAuthToken: false,
-    cameraStreamNeedDrmEncryption:
+    cameraStreamNeedDrmEncryption: false,
+  }
+},
+{
+  id: '2',
+  type: 'action.devices.types.CAMERA',
+  traits: [
+    'action.devices.traits.CameraStream'
+  ],
+  name: {
+    defaultNames: ['Security Camera 2'],
+    name: 'Camera 2',
+    nicknames: ['Back Door Camera'],
+  },
+  deviceInfo: {
+    manufacturer: 'Siddhy Co',
+    model: 'Siddhys Smart Camera',
+    hwVersion: '7.0',
+    swVersion: '7.0.7',
+  },
+  willReportState: true,
+  attributes: {
+    cameraStreamSupportedProtocols: ['hls, progressive_mp4', 'dash'],
+    cameraStreamNeedAuthToken: false,
+    cameraStreamNeedDrmEncryption: false,
   }
 }]
+
 
 app.onSync((body) => {
   return {
@@ -143,11 +170,12 @@ app.onQuery(async (body) => {
 
 const updateDevice = async (execution,deviceId) => {
   const {params,command} = execution;
-  let state, ref;
+  let state, ref, streamurl;
   switch (command) {
     case 'action.devices.commands.GetCameraStream':
-      state = {cameraStreamAccessUrl: 'https://www.radiantmediaplayer.com/media/bbb-360p.mp4'};
-      ref = firebaseRef.child(deviceId).child('SupportedStreamProtocols');
+        streamurl = cameraurls[deviceId];
+        state = {cameraStreamAccessUrl: streamurl};
+        ref = firebaseRef.child(deviceId).child('CameraStream');
   }
   return ref.update(state)
     .then(() => state);

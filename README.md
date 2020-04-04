@@ -3,6 +3,8 @@
 This project contains the code which demonstrates the integration of smart home devices with the Google Assistant  
 using a Firebase backend.
 
+## This branch contains samples for creating smart cameras.
+
 ## How to  
 
 Refer to the video below for step by step guidelines.    
@@ -11,7 +13,7 @@ Refer to the video below for step by step guidelines.
 " target="_blank"><img src="http://img.youtube.com/vi/e1C5WIfZ89s/0.jpg"
 alt="Detailed Youtube Video" width="240" height="180" border="10" /></a>   
 
-   
+
 1. Go to the Actions on Google Developer Console.    
 2. Click New Project, enter a name for the project, and click CREATE PROJECT.     
 3. Select the Smart Home App.     
@@ -76,15 +78,6 @@ alt="Detailed Youtube Video" width="240" height="180" border="10" /></a>
     5. Select that item. The Google Assistant will then authenticate with your service and send a SYNC request, asking your service to provide a list of devices for the user.   
 26. Now pre-programmed devices will appear in the Google Home app.   
 
-## Pre-programmed smart devices   
-
-The codes in this project will create the following devices:  
-1. 1 RGB light with brightness, color and on/off control.    
-2. 1 Normal light with brightness and on/off control.  
-3. 1 Fan with speed and on/off control (speed control trait is currently disabled by google hence the corresponding segments of codes have been commented out).   
-4. 1 Thermostat with mode change and temperature control.  
-5. 1 Temperature sensor device with temperature readout only.  
-6. 1 Plug/Switch.     
 
 ## Adding or modifying the devices     
 
