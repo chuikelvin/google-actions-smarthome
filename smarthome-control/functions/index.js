@@ -266,7 +266,7 @@ app.onQuery(async (body) => {
 
 const updateDevice = async (execution, deviceId) => {
   const {params, command} = execution;
-  let state, let ref;
+  let state, ref;
   switch (command) {
     case 'action.devices.commands.OnOff':
       state = {on: params.on};

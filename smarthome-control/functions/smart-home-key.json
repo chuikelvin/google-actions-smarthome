@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "my-smart-device-21022",
+  "private_key_id": "df05fa4ffb952dd4a4c67c80d975d8cab4efef90",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDkYVKChekf8w4B\nn2DwWbdNJgq4Nu6Moyj1CAUb9K2wDegxoxk68Jl04kqa1QJeu0H9awgFvMR/rs11\nAHj0OK2DPejcHFQ/J9LCEgpo6jB5L13LsMpbRLMTV+vTvbRNBwZ5ad1bTkbp9+69\nDO33w5Jzx5P2Ne3P4sOlUQXkJF2FsAh4g2kTj5+cozfV4hDI+DnfDxfPYNyHTBJx\n5QqnukPEGhPEhxGa4w5il9qMa+O9qZvcN4U9QgGeR4OY/qciJh9RJC82DAWD4tcp\n9Y5JhFeZ3EYLhcZfXE2LUknoTXuRo1diMGxhwyCabDJZ8dlGMb0M+QfJLKO1mRO3\nBEl5Rk33AgMBAAECggEAIlAG/ApPjNfRPmgqQeJQ2nwBN001iRbIhAwY7GrWH7Hv\nNWn6U/MrMzb+m4Wubfo3f3Ixyd7jLQXf45jXE2Zil2nZTxzIgZajoTnhq4KoFsUJ\nlB1zQcQwHZNjoLQLX1lTXTGNKvc3S1bPXUMQi92r5s5RCjhvCwFYgMGMH4thK8EO\nt6rnBmtYAxC92M9Y2TDHgIrBe7xoAws4fM1Bw+3TvpbYhpU6B197m97Ihqhf9Tzi\nz7PrDOSwp4LMW5pkHWuNNSPIeYFluf68jQMReZec7jMBZQ5rSJR6bEjrFHiYv2Ei\neTnm80J4ShX3GLFrqbVQsLYkUHflGahvtvIP4EMNfQKBgQD/nYJgrvz3XJuR6s2B\n+FRPT8ZOzMpdZwfd5ZVJlOIft18n8vs+9gdOifpgctcszT3xBcoXXUoxrpqOmMH/\nSNUzaTgZKSs+lV0wQt3hYI5dxq9TPefjRmADOHv5e5m8NtrjEnxkz9G52tYYmtW2\nPrChZ4AfD4z+kAm4LEIYy4SejQKBgQDkuVGwn+So/lLW+irwYCblBsuf+9gPUXoF\nxnBrmMa0NC5x8x4QlY7A6nq0tBHvqo1Vui+9Yo4f7iFBHaX/j8yihL+6jVEc89cA\nfTVGliAeq6VIY/y/udJx2S22rpD0e//6raDPyOuM3+WF5gsIfnAOI5/NlEU+l4n9\n+XFFy2kPkwKBgB6SGeuyQfLbkoeLC3UF3B94LQFzoKg3EEvLj2Uzdy/P4IOInd/T\n0N/lxJoQYgerrELNLHRK5fq3JSj0wA7mCQmTBfCMae2cM374IE06HQy+HG3aM4eM\n/SKleL5HuAU4kkkiBtqPuEeAEqbyraiUKs/C7yHH3Fb9pwvtzyHkBUJpAoGBAKc4\nPdst6xUKazI00DPReF41K6YZkAsS/G1AeWyQ06VoCRTSNAbX8Phl9bQrenmIbbBh\nYQnLBjGd/b4HmRdQ4MFo4GvZaZYLSANZhxvGIlGKGFrmjyD1EECgEWXgFqZICgwR\n6OJA+MWT49CTMTnShsYvkWPRpRZv4DlIp2HppzP1AoGBANLOysk2VVAJR//3OlYZ\nnZnYlBV1Y5ByR+dSCrhcQbJuYLMNw0OIlZARjlp/VVNfuiTv6cXGJxlQyXKvpuba\n7XmFICBvGR76GLNdTTtlOWQU2Qb+CjERAhTTanyci0vWw3+cnlA2IakG0I6JvnFd\nc0u6YbcHCU3PHL/fvvyte6iV\n-----END PRIVATE KEY-----\n",
+  "client_email": "mytestapp@my-smart-device-21022.iam.gserviceaccount.com",
+  "client_id": "106229689244464481044",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mytestapp%40my-smart-device-21022.iam.gserviceaccount.com"
+}
